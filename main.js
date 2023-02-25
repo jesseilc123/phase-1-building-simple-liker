@@ -12,21 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fakeCallback(data){
   const pageHearts = document.querySelectorAll(".like-glyph");
-  const unlike = document.querySelectorAll(".activated-heart")
-
+ 
   pageHearts.forEach((heart) => {
     heart.addEventListener("click", () => {
-      heart.classList.add("activated-heart")
-      heart.innerText = FULL_HEART
+      heart.classList.toggle("activated-heart")
+      if(heart.classList == "like-glyph activated-heart"){
+        return heart.innerText = FULL_HEART
+      }
+      if(heart.classList != "like-glyph activated-heart"){
+        return heart.innerText = EMPTY_HEART
+      }
     })
-  })
-
-  unlike.forEach((unheart) => {
-    unheart.addEventListener("click", () => {
-      unheart.classList.remove("activated-heart")
-      unheart.innerText = EMPTY_HEART
-    })
-  })
+  }) 
 }
 
 function handleError(error){
@@ -35,6 +32,9 @@ function handleError(error){
   let hidden = document.getElementById("modal")
   console.log(hidden.className)
   hidden.classList.remove("hidden")
+  setTimeout(() => {
+    hidden.classList.add("hidden")
+  }, 3000)
 }
 
 //------------------------------------------------------------------------------
